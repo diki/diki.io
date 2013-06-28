@@ -1,0 +1,306 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+
+        <style type="text/css">
+            body {
+                margin: 0;
+                padding: 0;
+                background: rgb(255, 221, 0);
+            }
+
+            canvas {
+                box-shadow: 0px -7px 17px rgba(0,0,0, 0.2) inset;
+            }
+        </style>
+    </head>
+    <body>
+
+        <canvas id="canvas"></canvas>
+
+        <script>
+
+            (function(){
+
+                var canvas = document.getElementById("canvas");
+
+                var width = canvasWidth = window.innerWidth,
+                canvasHeight = 390, unit=15;
+
+                var gridHeight = canvasHeight/unit;
+                var gridWidth = canvasWidth/unit;
+
+                canvas.width = canvasWidth;
+                canvas.height = canvasHeight;
+
+                canvas.style.background = "#FFF";
+                canvas.style.border = "1px solid #e5e5e5";
+
+                var ctx = canvas.getContext('2d');
+
+
+                var leftMargin = Math.floor((gridWidth-63)/2);
+                var topMargin = 6;
+
+                function prepareHelloWorldPoints(){
+                    var result = [];
+                    //h
+                    for(var i=0; i<12; i++){
+                        result.push({x: leftMargin, y: topMargin+i}); 
+                    }
+                    leftMargin += 1;
+                    for(var i=0; i<5; i++){
+                        result.push({x: leftMargin, y: topMargin+5});
+                        leftMargin += 1;
+                    }
+                    leftMargin -= 1;
+                    for(var i=0; i<6; i++){
+                        result.push({x:leftMargin, y: topMargin+6+i});
+                    }
+                    leftMargin += 2
+
+                    //e
+                    for(var i=0; i<5; i++){
+                        result.push({x:leftMargin, y: topMargin+6+i});
+                    }
+                    leftMargin += 1;
+
+                    for(var j=0; j<4; j++){
+                        for(var i=0; i<3; i++){
+                            result.push({x: leftMargin, y:topMargin+5+i*3});
+                        }
+                        leftMargin += 1;
+                        
+                    }
+                    result.push({x:leftMargin, y: topMargin+6});
+                    result.push({x:leftMargin, y: topMargin+7});
+                    result.push({x:leftMargin, y: topMargin+10});
+                    leftMargin += 2;
+
+                    //l
+                    for(var i=0; i<12; i++){
+                        result.push({x:leftMargin, y:topMargin+i});
+                    }
+                    //l
+                    leftMargin += 2;
+                    for(var i=0; i<12; i++){
+                        result.push({x:leftMargin, y:topMargin+i});
+                    }
+                    leftMargin += 2;
+
+                    //o
+                    for(var i=0; i<5; i++){
+                        result.push({x:leftMargin, y: topMargin+6+i});
+                    }
+                    leftMargin += 1;
+                    for(var j=0; j<4; j++){
+                        for(var i=0; i<2; i++){
+                            result.push({x: leftMargin, y:topMargin+5+i*6});
+                        }
+                        leftMargin += 1;
+                    } 
+                    for(var i=0; i<5; i++){
+                        result.push({x:leftMargin, y: topMargin+6+i});
+                    }
+                    leftMargin += 4; 
+                    
+                    //w
+                    for(var i=0; i<3; i++){
+                        result.push({x:leftMargin, y: topMargin+5+i});
+                    }
+                    leftMargin += 1;
+                    for(var i=0; i<3; i++){
+                        result.push({x:leftMargin, y: topMargin+8+i});
+                    }
+                    leftMargin += 1;
+                    result.push({x:leftMargin, y:topMargin+11});
+                    leftMargin += 1;
+                    for(var i=0; i<3; i++){
+                        result.push({x:leftMargin, y: topMargin+8+i});
+                    }
+                    leftMargin += 1;
+                    for(var i=0; i<3; i++){
+                        result.push({x:leftMargin, y: topMargin+5+i});
+                    }
+                    leftMargin += 1;
+                    for(var i=0; i<3; i++){
+                        result.push({x:leftMargin, y: topMargin+8+i});
+                    }
+                    leftMargin += 1;
+                    result.push({x:leftMargin, y:topMargin+11});
+                    leftMargin += 1;   
+                    for(var i=0; i<3; i++){
+                        result.push({x:leftMargin, y: topMargin+8+i});
+                    }
+                    leftMargin += 1;                                                                                                                                                         
+                    for(var i=0; i<3; i++){
+                        result.push({x:leftMargin, y: topMargin+5+i});
+                    }
+                    leftMargin += 2;
+
+                    //o
+                    for(var i=0; i<5; i++){
+                        result.push({x:leftMargin, y: topMargin+6+i});
+                    }
+                    leftMargin += 1;
+                    for(var j=0; j<4; j++){
+                        for(var i=0; i<2; i++){
+                            result.push({x: leftMargin, y:topMargin+5+i*6});
+                        }
+                        leftMargin += 1;
+                    } 
+                    for(var i=0; i<5; i++){
+                        result.push({x:leftMargin, y: topMargin+6+i});
+                    }
+                    leftMargin += 2;
+
+                    //r
+                    for(var i=0; i<7; i++){
+                        result.push({x: leftMargin, y:topMargin+5+i});
+                    }
+                    leftMargin += 1;
+                    result.push({x:leftMargin, y:topMargin+6});
+                    leftMargin += 1;
+                    result.push({x:leftMargin, y:topMargin+5});
+                    leftMargin += 1;
+                    result.push({x:leftMargin, y:topMargin+5});
+                    leftMargin += 1; 
+                    result.push({x:leftMargin, y:topMargin+6});
+                    leftMargin += 2;
+
+                    //l
+                    for(var i=0; i<12; i++){
+                        result.push({x:leftMargin, y:topMargin+i});
+                    }
+                    leftMargin += 2;
+
+                    //d
+                    for(var i=0; i<5; i++){
+                        result.push({x:leftMargin, y: topMargin+6+i});
+                    }
+                    leftMargin += 1;  
+                    for(var j=0; j<4; j++){
+                        for(var i=0; i<2; i++){
+                            result.push({x: leftMargin, y:topMargin+5+i*6});
+                        }
+                        leftMargin += 1;
+                    }
+                    for(var i=0; i<12; i++){
+                        result.push({x:leftMargin, y:topMargin+i});
+                    }
+                    leftMargin += 3;
+
+                    return result;
+                }
+
+                var r = prepareHelloWorldPoints();
+
+                function prepareRandomPoints(){
+                    var result = [];
+                    for(var i=0; i<174; i++){
+                        result[i] = new Point(getRandomInteger(0, Math.floor(gridWidth-7)),getRandomInteger(0, Math.floor(gridHeight-3)), r[i]);
+                    }
+
+                    return result;
+                }
+
+                var randomPoints = prepareRandomPoints();
+
+                var pr = [{x:20, y: 18}];
+                var rr = [new Point(10, 10, pr[0])];
+                var drawingInterval = setInterval(function(){
+                    //clear canvas
+                    ctx.clearRect(0, 0, canvasWidth , canvasHeight);
+
+                    //draw lines
+                    for(var i=0; i<gridWidth; i++){
+                        drawLine(i*16, 0, i*16,canvasHeight);
+                    }
+
+                    //draw lines
+                    for(var j=0; j<gridHeight; j++){
+                        drawLine(0, j*16,canvasWidth,j*16);
+                    }
+                    // rr.forEach(function(p){
+                    //     drawRect(p.x*16+1, p.y*16+1, 14, 14, 1, p.color || "green");
+                    //     p.movePoint();
+                    // });
+                    randomPoints.forEach(function(p){
+                        drawRect(p.x*16+1, p.y*16+1, 14, 14, 1, p.color || "red");
+                        p.movePoint();
+                    });
+
+                    // r.forEach(function(p){
+                    //     drawRect(p.x*16+1, p.y*16+1, 14, 14, 1, p.color || "#333");
+                    // });                    
+                    
+                }, 30);
+
+                function drawLine(x, y, dx, dy) {
+                    ctx.beginPath();
+                    ctx.moveTo(x, y);
+                    ctx.lineTo(dx, dy);
+                    ctx.strokeStyle = "#eee";
+                    ctx.closePath();
+                    ctx.stroke();
+                }
+
+                function drawRect(x,y,w,h,o, color) {
+                    ctx.beginPath();
+                    ctx.rect(x,y,w,h);
+                    ctx.globalAlpha = o;
+                    ctx.fillStyle = color;
+                    ctx.closePath();
+                    ctx.fill();
+                }
+
+                function getRandomInteger (min, max) {
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                }
+
+                function Point(x, y, target){
+                    this.x = x;
+                    this.y = y;
+                    this.color = "black";
+                    var lr = target.x>x ? 'r' : 'l';
+                    var ud = target.y>y ? 'd' : 'u';
+
+                    this.path =[];
+                    for(var i=0; i<Math.abs(target.x-x); i++){
+                        this.path.push(lr);
+                    }
+                    for(var i=0; i<Math.abs(target.y - y); i++){
+                        this.path.push(ud);
+                    }
+
+
+                    
+                    this.movePoint = function(){
+                        if(this.path.length===0){
+                            //this.color="red";
+                            return;
+                        }
+                        var l = this.path.length-1;
+                        if(this.path[l] === 'd'){
+                            this.y += 1;
+                        }
+                        if(this.path[l] === 'u'){
+                            this.y -= 1;
+                        } 
+                        if(this.path[l] === 'l'){
+                            this.x -= 1;
+                        }
+                        if(this.path[l] === 'r'){
+                            this.x += 1;
+                        }
+
+                        this.path.pop();
+                    }
+                }
+
+
+            })();
+
+        </script>
+    </body>
+</html>
