@@ -2,7 +2,15 @@
 <html>
     <head>
 
+        <link rel="stylesheet" type="text/css" href="fonts/stylesheet.css">
         <style type="text/css">
+            * {
+                -webkit-transition: all 0.57s ease;
+                -moz-transition: all 0.57s ease;
+                -ms-transition: all 0.57s ease;
+                -o-transition: all 0.57s ease;
+                transition: all 0.57s ease;
+            }
             body {
                 margin: 0;
                 padding: 0;
@@ -12,12 +20,45 @@
             canvas {
                 box-shadow: 0px -7px 17px rgba(0,0,0, 0.2) inset;
             }
+
+            .hero {
+                max-width: 978px;
+                margin: 0 auto;
+                margin-top: -150px;
+                opacity: 0;
+            }
+
+            .hero p {
+                font-family: "SourceSansProLight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+                /*text-align: center;*/
+                font-size: 2.5em;
+                color: #B9B5AA;
+                line-height: 54px;
+                text-shadow: 0 0 1px #555;
+                color: #555; 
+                margin-left: 116px;               
+            }
+            .avatar {
+                width: 96px;
+                height: 96px;
+                border-radius: 50%;
+                box-shadow: 0 0 0 3px #FFF, 0 3px 10px rgba(0, 0, 0, .1);
+                /*position: absolute;*/
+/*                top: 12px;
+                left: 200px;*/
+            }
         </style>
     </head>
     <body>
-
         <canvas id="canvas"></canvas>
 
+        <div class="hero">
+            <img src="img/me.jpeg" class="avatar" style="float: left;"/>
+            <p>
+                I am Mustafa Dikici. I'm Javascript/Front End Engineer at <b>JotForm</b> and live in Ankara, Turkey.
+            </p>
+        </div>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>        
         <script>
 
             (function(){
@@ -193,12 +234,12 @@
                     return result;
                 }
 
-                var r = prepareHelloWorldPoints();
+                var helloWorldPoints = prepareHelloWorldPoints();
 
                 function prepareRandomPoints(){
                     var result = [];
                     for(var i=0; i<174; i++){
-                        result[i] = new Point(getRandomInteger(0, Math.floor(gridWidth-7)),getRandomInteger(0, Math.floor(gridHeight-3)), r[i]);
+                        result[i] = new Point(getRandomInteger(0, Math.floor(gridWidth-7)),getRandomInteger(0, Math.floor(gridHeight-3)), helloWorldPoints[i]);
                     }
 
                     return result;
@@ -257,11 +298,13 @@
                 function getRandomInteger (min, max) {
                     return Math.floor(Math.random() * (max - min + 1)) + min;
                 }
-
+                
+                var finished = 0;
                 function Point(x, y, target){
                     this.x = x;
                     this.y = y;
                     this.color = "black";
+                    this.completed = false;
                     var lr = target.x>x ? 'r' : 'l';
                     var ud = target.y>y ? 'd' : 'u';
 
@@ -272,12 +315,21 @@
                     for(var i=0; i<Math.abs(target.y - y); i++){
                         this.path.push(ud);
                     }
-
-
                     
                     this.movePoint = function(){
-                        if(this.path.length===0){
-                            //this.color="red";
+                        if(this.path.length === 0){
+                            
+                            if(!this.completed){
+                                finished += 1;
+                                this.completed = true
+                            }
+                            //console.log(finished, helloWorldPoints.length);
+                            if(finished === helloWorldPoints.length){
+                                clearInterval(drawingInterval);
+                                console.log("shit finished");
+                                $(".hero").css("margin-top", 0);
+                                $(".hero").css("opacity", 1);
+                            }
                             return;
                         }
                         var l = this.path.length-1;
@@ -302,5 +354,7 @@
             })();
 
         </script>
+
+
     </body>
 </html>
