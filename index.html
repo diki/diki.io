@@ -2,37 +2,32 @@
 <html>
     <head>
 
-        <link rel="stylesheet" type="text/css" href="fonts/stylesheet.css">
         <style type="text/css">
             * {
-                -webkit-transition: all 0.57s ease;
-                -moz-transition: all 0.57s ease;
-                -ms-transition: all 0.57s ease;
-                -o-transition: all 0.57s ease;
-                transition: all 0.57s ease;
+
             }
             body {
                 margin: 0;
                 padding: 0;
                 background: rgb(255, 221, 0);
+                font-family: "SourceSansProLight", "Helvetica Neue", Helvetica, Arial, sans-serif;
             }
-
             canvas {
                 box-shadow: 0px -7px 17px rgba(0,0,0, 0.2) inset;
             }
-
             .hero {
                 max-width: 978px;
                 margin: 0 auto;
                 margin-top: -150px;
                 opacity: 0;
+                -webkit-transition: all 0.57s ease;
+                -moz-transition: all 0.57s ease;
+                -ms-transition: all 0.57s ease;
+                -o-transition: all 0.57s ease;
+                transition: all 0.57s ease;                
             }
-
             .hero p {
-                font-family: "SourceSansProLight", "Helvetica Neue", Helvetica, Arial, sans-serif;
-                /*text-align: center;*/
                 font-size: 2.5em;
-                color: #B9B5AA;
                 line-height: 54px;
                 text-shadow: 0 0 1px #555;
                 color: #555; 
@@ -43,24 +38,94 @@
                 height: 96px;
                 border-radius: 50%;
                 box-shadow: 0 0 0 3px #FFF, 0 3px 10px rgba(0, 0, 0, .1);
-                /*position: absolute;*/
-/*                top: 12px;
-                left: 200px;*/
+            }
+            
+            #links {
+                -webkit-transition: all 0.27s ease;
+                -moz-transition: all 0.27s ease;
+                -ms-transition: all 0.27s ease;
+                -o-transition: all 0.27s ease;
+                transition: all 0.27s ease;                
+                position: absolute;
+                right: -140px;
+                top: 13px;
+            }
+            .social {
+                -webkit-transition: all 0.37s ease;
+                -moz-transition: all 0.37s ease;
+                -ms-transition: all 0.37s ease;
+                -o-transition: all 0.37s ease;
+                transition: all 0.37s ease;                  
+                font-size: 36px;
+                padding: 4px;
+                text-decoration: none;
+                color: #000;
+            }
+            .social:visited {
+                color: #000;
+                text-decoration: none;
+            }
+            .social.linkedin:hover {
+                color: #069;    
+            }
+            .social.github:hover {
+                color: #888;
+            }
+            .social.mail:hover {
+                color: #c53727;
+            }
+            
+            .firm {
+                text-decoration: none;
+                border-bottom: 1px solid #fff;
+            }
+            .firm:visited {
+                color: #555;
+                text-decoration: none;
+            }
+            .footer {
+                -webkit-transition: all 0.27s ease;
+                -moz-transition: all 0.27s ease;
+                -ms-transition: all 0.27s ease;
+                -o-transition: all 0.27s ease;                
+                position: absolute;
+                width: 978px;
+                left: 50%;
+                margin-left: -489px;
+                bottom: 10px;
+                opacity: 0;
             }
         </style>
+        <link rel="stylesheet" type="text/css" href="fonts/stylesheet.css">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
     </head>
     <body>
+        <div id="links">
+            <a class="social github" target="_blank" href="https://github.com/diki">
+                <i class="icon-github"></i>
+            </a>
+            <a class="social linkedin" target="_blank" href="http://tr.linkedin.com/pub/mustafa-dikici/1b/650/26b">
+                <i class="icon-linkedin"></i>
+            </a>
+            <a class="social mail" target="_blank" href="mailto:musdikici@gmail.com">
+                <i class="icon-envelope-alt"></i>
+            </a>            
+        </div>
         <canvas id="canvas"></canvas>
-
         <div class="hero">
             <img src="img/me.jpeg" class="avatar" style="float: left;"/>
             <p>
-                I am Mustafa Dikici. I'm Javascript/Front End Engineer at <b>JotForm</b> and live in Ankara, Turkey.
+                I am Mustafa Dikici. I am Javascript/Front End Engineer at 
+                <a class="firm" href="http://www.jotform.com"><b>JotForm</b></a> and live in Ankara, Turkey.
             </p>
         </div>
+        
+        <div class="footer">
+            Design of this page is <a class="firm" href="https://github.com/diki/diki.io">open source</a>
+        </div>
+        
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>        
         <script>
-
             (function(){
 
                 var canvas = document.getElementById("canvas");
@@ -246,9 +311,6 @@
                 }
 
                 var randomPoints = prepareRandomPoints();
-
-                var pr = [{x:20, y: 18}];
-                var rr = [new Point(10, 10, pr[0])];
                 var drawingInterval = setInterval(function(){
                     //clear canvas
                     ctx.clearRect(0, 0, canvasWidth , canvasHeight);
@@ -262,18 +324,10 @@
                     for(var j=0; j<gridHeight; j++){
                         drawLine(0, j*16,canvasWidth,j*16);
                     }
-                    // rr.forEach(function(p){
-                    //     drawRect(p.x*16+1, p.y*16+1, 14, 14, 1, p.color || "green");
-                    //     p.movePoint();
-                    // });
                     randomPoints.forEach(function(p){
                         drawRect(p.x*16+1, p.y*16+1, 14, 14, 1, p.color || "red");
                         p.movePoint();
                     });
-
-                    // r.forEach(function(p){
-                    //     drawRect(p.x*16+1, p.y*16+1, 14, 14, 1, p.color || "#333");
-                    // });                    
                     
                 }, 30);
 
@@ -329,6 +383,10 @@
                                 console.log("shit finished");
                                 $(".hero").css("margin-top", 0);
                                 $(".hero").css("opacity", 1);
+                                setTimeout(function(){
+                                    $(".footer").css("opacity", 1);
+                                    $("#links").css("right", 17);
+                                }, 1000);
                             }
                             return;
                         }
