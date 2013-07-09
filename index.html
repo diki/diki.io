@@ -6,11 +6,50 @@
             * {
 
             }
+            @media all and (max-width: 570px) {
+                body { font-size:100%;}
+                
+                .hero p.info {
+                    color: #555; 
+                    margin-left: 116px;               
+                }
+                
+             }
+             
+            @media all and (max-width: 720px) and (min-width: 570px) {
+                body { font-size:100%;}
+                
+                .hero p.info {
+                    font-size: 2.5em;
+                    color: #555; 
+                    margin-left: 116px;               
+                }
+                
+             }             
+            @media all and (max-width: 1200px) and (min-width: 720px) {
+                body { font-size:100%;}
+                .hero p.info {
+                    font-size: 2.0em;
+                    line-height: 54px;
+                    color: #555; 
+                    margin-left: 116px;               
+                }
+            }             
+            @media only screen and (min-width: 1200px) {
+                body { font-size:100%;}
+                .hero p.info {
+                    font-size: 2.5em;
+                    line-height: 54px;
+                    color: #555; 
+                    margin-left: 116px;               
+                }
+            }
             body {
                 margin: 0;
                 padding: 0;
                 background: rgb(255, 221, 0);
                 font-family: "SourceSansProLight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+                /*font-size: 100%;*/
             }
             canvas {
                 box-shadow: 0px -7px 17px rgba(0,0,0, 0.2) inset;
@@ -18,21 +57,17 @@
             .hero {
                 max-width: 978px;
                 margin: 0 auto;
-                margin-top: -150px;
+                margin-top: -10px;
                 opacity: 0;
                 -webkit-transition: all 0.57s ease;
                 -moz-transition: all 0.57s ease;
                 -ms-transition: all 0.57s ease;
                 -o-transition: all 0.57s ease;
-                transition: all 0.57s ease;                
-            }
-            .hero p {
-                font-size: 2.5em;
-                line-height: 54px;
-                text-shadow: 0 0 1px #555;
-                color: #555; 
-                margin-left: 116px;               
-            }
+                transition: all 0.57s ease;    
+                width: 68%;
+            }            
+
+
             .avatar {
                 width: 96px;
                 height: 96px;
@@ -83,17 +118,16 @@
                 color: #555;
                 text-decoration: none;
             }
-            .footer {
+            .source {
                 -webkit-transition: all 0.27s ease;
                 -moz-transition: all 0.27s ease;
                 -ms-transition: all 0.27s ease;
                 -o-transition: all 0.27s ease;                
-                position: absolute;
-                width: 978px;
-                left: 50%;
-                margin-left: -489px;
-                bottom: 10px;
                 opacity: 0;
+                /*margin-top: 24px;*/
+                position: fixed;
+                right: 16px;
+                bottom: 0;
             }
         </style>
         <link rel="stylesheet" type="text/css" href="fonts/stylesheet.css">
@@ -114,14 +148,15 @@
         <canvas id="canvas"></canvas>
         <div class="hero">
             <img src="img/me.jpeg" class="avatar" style="float: left;"/>
-            <p>
+            <p class="info">
                 I am Mustafa Dikici. I am Javascript/Front End Engineer at 
                 <a class="firm" href="http://www.jotform.com"><b>JotForm</b></a> and live in Ankara, Turkey.
             </p>
-        </div>
-        
-        <div class="footer">
-            Design of this page is <a class="firm" href="https://github.com/diki/diki.io">open source</a>
+            
+            <p class="source">
+                Design of this page is 
+                <a class="firm" href="https://github.com/diki/diki.io" style="color:#555;">open source</a>
+            </p>
         </div>
         
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>        
@@ -131,7 +166,9 @@
                 var canvas = document.getElementById("canvas");
 
                 var width = canvasWidth = window.innerWidth,
-                canvasHeight = 390, unit=15;
+                    ratio = width/1366,
+                    unit=15*ratio,
+                    canvasHeight = 390*ratio;
 
                 var gridHeight = canvasHeight/unit;
                 var gridWidth = canvasWidth/unit;
@@ -317,19 +354,19 @@
 
                     //draw lines
                     for(var i=0; i<gridWidth; i++){
-                        drawLine(i*16, 0, i*16,canvasHeight);
+                        drawLine(i*16*ratio, 0, i*16*ratio,canvasHeight);
                     }
 
                     //draw lines
                     for(var j=0; j<gridHeight; j++){
-                        drawLine(0, j*16,canvasWidth,j*16);
+                        drawLine(0, j*16*ratio,canvasWidth,j*16*ratio);
                     }
                     randomPoints.forEach(function(p){
-                        drawRect(p.x*16+1, p.y*16+1, 14, 14, 1, p.color || "red");
+                        drawRect(p.x*(16+1)*ratio, p.y*(16+1)*ratio, 14*ratio, 14*ratio, 1*ratio, p.color || "red");
                         p.movePoint();
                     });
                     
-                }, 30);
+                }, 25);
 
                 function drawLine(x, y, dx, dy) {
                     ctx.beginPath();
@@ -384,9 +421,9 @@
                                 $(".hero").css("margin-top", 0);
                                 $(".hero").css("opacity", 1);
                                 setTimeout(function(){
-                                    $(".footer").css("opacity", 1);
+                                    $(".source").css("opacity", 1);
                                     $("#links").css("right", 17);
-                                }, 1000);
+                                }, 3000);
                             }
                             return;
                         }
