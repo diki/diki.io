@@ -45,7 +45,6 @@
                 }
             }
             body {
-                overflow-x: hidden;
                 margin: 0;
                 padding: 0;
                 background: rgb(255, 221, 0);
@@ -77,22 +76,21 @@
             }
             
             #links {
-                -webkit-transition: all 0.57s ease;
-                -moz-transition: all 0.57s ease;
-                -ms-transition: all 0.57s ease;
-                -o-transition: all 0.57s ease;
-                transition: all 0.57s ease;                
+                -webkit-transition: all 0.27s ease;
+                -moz-transition: all 0.27s ease;
+                -ms-transition: all 0.27s ease;
+                -o-transition: all 0.27s ease;
+                transition: all 0.27s ease;                
                 position: absolute;
-                right: 14px;
-                top: 0;
-                opacity: 0;
+                right: -140px;
+                top: 13px;
             }
             .social {
-                -webkit-transition: all 0.57s ease;
-                -moz-transition: all 0.57s ease;
-                -ms-transition: all 0.57s ease;
-                -o-transition: all 0.57s ease;
-                transition: all 0.57s ease;                  
+                -webkit-transition: all 0.37s ease;
+                -moz-transition: all 0.37s ease;
+                -ms-transition: all 0.37s ease;
+                -o-transition: all 0.37s ease;
+                transition: all 0.37s ease;                  
                 font-size: 36px;
                 padding: 4px;
                 text-decoration: none;
@@ -121,10 +119,10 @@
                 text-decoration: none;
             }
             .source {
-                -webkit-transition: all 0.57s ease;
-                -moz-transition: all 0.57s ease;
-                -ms-transition: all 0.57s ease;
-                -o-transition: all 0.57s ease;                
+                -webkit-transition: all 0.27s ease;
+                -moz-transition: all 0.27s ease;
+                -ms-transition: all 0.27s ease;
+                -o-transition: all 0.27s ease;                
                 opacity: 0;
                 /*margin-top: 24px;*/
                 position: fixed;
@@ -422,13 +420,10 @@
                                 console.log("shit finished");
                                 $(".hero").css("margin-top", 0);
                                 $(".hero").css("opacity", 1);
-                                $(".source").css("opacity", 1);
-                                $("#links").css("opacity", 1);
-                                $("#links").css("top", 13);                                
-                                // setTimeout(function(){
-                                //     $(".source").css("opacity", 1);
-                                //     $("#links").css("right", 17);
-                                // }, 3000);
+                                setTimeout(function(){
+                                    $(".source").css("opacity", 1);
+                                    $("#links").css("right", 17);
+                                }, 3000);
                             }
                             return;
                         }
