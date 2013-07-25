@@ -140,7 +140,9 @@
             }
 
             .rotatex {
-                -webkit-transform: rotatex(5deg);
+                -webkit-transform: rotateX(5deg);
+                transform:rotateX(5deg);
+                /*-ms-transform:rotateX(5deg);*/
             }
         </style>
         <link rel="stylesheet" type="text/css" href="fonts/stylesheet.css">
@@ -158,7 +160,7 @@
                 <i class="icon-envelope-alt"></i>
             </a>            
         </div>
-        <div class="canvas-container" style="-webkit-perspective:300px;">
+        <div class="canvas-container" style="-webkit-perspective:300px;perspective:300px;">
             <canvas id="canvas" class="transition97"></canvas>
         </div>
         <div class="hero">
