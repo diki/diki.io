@@ -50,6 +50,7 @@
                 background: rgb(255, 221, 0);
                 font-family: "SourceSansProLight", "Helvetica Neue", Helvetica, Arial, sans-serif;
                 /*font-size: 100%;*/
+                overflow-x:hidden;
             }
             canvas {
                 box-shadow: 0px -7px 17px rgba(0,0,0, 0.2) inset;
@@ -82,8 +83,8 @@
                 -o-transition: all 0.27s ease;
                 transition: all 0.27s ease;                
                 position: absolute;
-                right: -140px;
-                top: 13px;
+                right: 18px;
+                top: -35px;
             }
             .social {
                 -webkit-transition: all 0.37s ease;
@@ -129,12 +130,24 @@
                 right: 16px;
                 bottom: 0;
             }
+
+            .transition97 {
+                -webkit-transition: all 0.97s ease;
+                -moz-transition: all 0.97s ease;
+                -ms-transition: all 0.97s ease;
+                -o-transition: all 0.97s ease;
+                transition: all 0.97s ease; 
+            }
+
+            .rotatex {
+                -webkit-transform: rotatex(5deg);
+            }
         </style>
         <link rel="stylesheet" type="text/css" href="fonts/stylesheet.css">
         <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
     </head>
     <body>
-        <div id="links">
+        <div id="links" style="z-index:999;">
             <a class="social github" target="_blank" href="https://github.com/diki">
                 <i class="icon-github"></i>
             </a>
@@ -145,7 +158,9 @@
                 <i class="icon-envelope-alt"></i>
             </a>            
         </div>
-        <canvas id="canvas"></canvas>
+        <div class="canvas-container" style="-webkit-perspective:300px;">
+            <canvas id="canvas" class="transition97"></canvas>
+        </div>
         <div class="hero">
             <img src="img/me.jpeg" class="avatar" style="float: left;"/>
             <p class="info">
@@ -182,7 +197,7 @@
                 var ctx = canvas.getContext('2d');
 
 
-                var leftMargin = Math.floor((gridWidth-63)/2);
+                var leftMargin = Math.floor((gridWidth-68)/2);
                 var topMargin = 6;
 
                 function prepareHelloWorldPoints(){
@@ -417,12 +432,23 @@
                             //console.log(finished, helloWorldPoints.length);
                             if(finished === helloWorldPoints.length){
                                 clearInterval(drawingInterval);
-                                console.log("shit finished");
                                 $(".hero").css("margin-top", 0);
                                 $(".hero").css("opacity", 1);
+
                                 setTimeout(function(){
+                                    $("#canvas").addClass("rotatex");
+                                    setTimeout(function(){
+                                        $("#links").css("top", 13);
+                                    }, 600);
+                                    setTimeout(function(){
+                                        $("#canvas").removeClass("rotatex");
+                                    }, 1000);
+                                }, 1500);
+
+                                setTimeout(function(){
+                                    
                                     $(".source").css("opacity", 1);
-                                    $("#links").css("right", 17);
+                                    
                                 }, 3000);
                             }
                             return;
