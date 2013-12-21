@@ -20,7 +20,6 @@
                 body { font-size:100%;}
                 
                 .hero p.info {
-                    font-size: 2.5em;
                     color: #555; 
                     margin-left: 116px;               
                 }
@@ -29,8 +28,6 @@
             @media all and (max-width: 1200px) and (min-width: 720px) {
                 body { font-size:100%;}
                 .hero p.info {
-                    font-size: 2.0em;
-                    line-height: 54px;
                     color: #555; 
                     margin-left: 116px;               
                 }
@@ -38,8 +35,6 @@
             @media only screen and (min-width: 1200px) {
                 body { font-size:100%;}
                 .hero p.info {
-                    font-size: 2.5em;
-                    line-height: 54px;
                     color: #555; 
                     margin-left: 116px;               
                 }
@@ -160,14 +155,15 @@
                 <i class="icon-envelope-alt"></i>
             </a>            
         </div>
-        <div class="canvas-container" style="-webkit-perspective:300px;perspective:300px;">
+        <div class="canvas-container" style="-webkit-perspective:300px;perspective:300px; background:#FFF;">
             <canvas id="canvas" class="transition97"></canvas>
         </div>
         <div class="hero">
-            <img src="img/me.jpeg" class="avatar" style="float: left;"/>
-            <p class="info">
-                I am Mustafa Dikici. I am a Javascript/Front End Engineer at 
-                <a class="firm" href="http://www.jotform.com"><b>JotForm</b></a> and live in Ankara, Turkey.
+            <img src="img/me2.jpeg" class="avatar" style="float: left;" alt="mustafa dikici"/>
+            <p class="info" style="">
+                I am Mustafa Dikici. I am Javascript Engineer at 
+                <a class="firm" href="http://www.jotform.com"><b>JotForm</b></a> and live in Ankara, Turkey. I have been daily coding javascript for 2 years 
+                including single page applications and nodejs for jotform.com and working on some open source projects, you can check them out on my github page 
             </p>
             
             <p class="source">
@@ -175,32 +171,34 @@
                 <a class="firm" href="https://github.com/diki/diki.io" style="color:#555;">open source</a>
             </p>
         </div>
+        <!-- I love clean code. There, I said it. I pride myself on passing strict linting standards and keeping my code easy to read. 
+        It’s not just a personal proclivity, but a choice I hope benefits other developers. -->
         
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script src="js/fittext.js"></script>
+        
+        <script>
+          jQuery(".info").fitText(2.2);
+        </script>        
         <script>
             (function(){
 
                 var canvas = document.getElementById("canvas");
 
-                var width = canvasWidth = window.innerWidth,
-                    ratio = width/1366,
-                    unit=15*ratio,
-                    canvasHeight = 390*ratio;
-
-                var gridHeight = canvasHeight/unit;
-                var gridWidth = canvasWidth/unit;
+                var width = canvasWidth = window.innerWidth
+                    , ratio = width/1366
+                    , unit=15*ratio
+                    , canvasHeight = 280*ratio
+                    , gridHeight = canvasHeight/unit
+                    , gridWidth = canvasWidth/unit
+                    , ctx = canvas.getContext('2d')
+                    , leftMargin = Math.floor((gridWidth-68)/2)
+                    , topMargin = 6;
 
                 canvas.width = canvasWidth;
                 canvas.height = canvasHeight;
-
                 canvas.style.background = "#FFF";
                 canvas.style.border = "1px solid #e5e5e5";
-
-                var ctx = canvas.getContext('2d');
-
-
-                var leftMargin = Math.floor((gridWidth-68)/2);
-                var topMargin = 6;
 
                 function prepareHelloWorldPoints(){
                     var result = [];
@@ -218,7 +216,6 @@
                         result.push({x:leftMargin, y: topMargin+6+i});
                     }
                     leftMargin += 2
-
                     //e
                     for(var i=0; i<5; i++){
                         result.push({x:leftMargin, y: topMargin+6+i});
@@ -236,7 +233,6 @@
                     result.push({x:leftMargin, y: topMargin+7});
                     result.push({x:leftMargin, y: topMargin+10});
                     leftMargin += 2;
-
                     //l
                     for(var i=0; i<12; i++){
                         result.push({x:leftMargin, y:topMargin+i});
@@ -247,7 +243,6 @@
                         result.push({x:leftMargin, y:topMargin+i});
                     }
                     leftMargin += 2;
-
                     //o
                     for(var i=0; i<5; i++){
                         result.push({x:leftMargin, y: topMargin+6+i});
@@ -263,7 +258,6 @@
                         result.push({x:leftMargin, y: topMargin+6+i});
                     }
                     leftMargin += 4; 
-                    
                     //w
                     for(var i=0; i<3; i++){
                         result.push({x:leftMargin, y: topMargin+5+i});
@@ -297,7 +291,6 @@
                         result.push({x:leftMargin, y: topMargin+5+i});
                     }
                     leftMargin += 2;
-
                     //o
                     for(var i=0; i<5; i++){
                         result.push({x:leftMargin, y: topMargin+6+i});
@@ -313,11 +306,11 @@
                         result.push({x:leftMargin, y: topMargin+6+i});
                     }
                     leftMargin += 2;
-
                     //r
                     for(var i=0; i<7; i++){
                         result.push({x: leftMargin, y:topMargin+5+i});
                     }
+                    
                     leftMargin += 1;
                     result.push({x:leftMargin, y:topMargin+6});
                     leftMargin += 1;
@@ -327,13 +320,11 @@
                     leftMargin += 1; 
                     result.push({x:leftMargin, y:topMargin+6});
                     leftMargin += 2;
-
                     //l
                     for(var i=0; i<12; i++){
                         result.push({x:leftMargin, y:topMargin+i});
                     }
                     leftMargin += 2;
-
                     //d
                     for(var i=0; i<5; i++){
                         result.push({x:leftMargin, y: topMargin+6+i});
@@ -349,7 +340,6 @@
                         result.push({x:leftMargin, y:topMargin+i});
                     }
                     leftMargin += 3;
-
                     return result;
                 }
 
@@ -369,12 +359,11 @@
                     //clear canvas
                     ctx.clearRect(0, 0, canvasWidth , canvasHeight);
 
-                    //draw lines
+                    //draw vertical lines
                     for(var i=0; i<gridWidth; i++){
                         drawLine(i*16*ratio, 0, i*16*ratio,canvasHeight);
                     }
-
-                    //draw lines
+                    //draw horizontal lines
                     for(var j=0; j<gridHeight; j++){
                         drawLine(0, j*16*ratio,canvasWidth,j*16*ratio);
                     }
@@ -472,12 +461,20 @@
                         this.path.pop();
                     }
                 }
-
-
             })();
 
         </script>
 
-
+        <script type="text/javascript"> 
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-35294536-1']);
+          _gaq.push(['_trackPageview']);
+          _gaq.push(['_setDomainName', 'diki.io']);
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+        </script>
     </body>
 </html>
