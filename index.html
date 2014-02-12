@@ -3,47 +3,6 @@
     <head>
 
         <style type="text/css">
-            * {
-
-            }
-            @media all and (max-width: 570px) {
-                body { font-size:100%;}
-                
-                .hero p.info {
-                    color: #555; 
-                    margin-left: 116px;               
-                }
-                
-             }
-             
-            @media all and (max-width: 720px) and (min-width: 570px) {
-                body { font-size:100%;}
-                
-                .hero p.info {
-                    font-size: 2.5em;
-                    color: #555; 
-                    margin-left: 116px;               
-                }
-                
-             }             
-            @media all and (max-width: 1200px) and (min-width: 720px) {
-                body { font-size:100%;}
-                .hero p.info {
-                    font-size: 2.0em;
-                    line-height: 54px;
-                    color: #555; 
-                    margin-left: 116px;               
-                }
-            }             
-            @media only screen and (min-width: 1200px) {
-                body { font-size:100%;}
-                .hero p.info {
-                    font-size: 2.5em;
-                    line-height: 54px;
-                    color: #555; 
-                    margin-left: 116px;               
-                }
-            }
             body {
                 margin: 0;
                 padding: 0;
@@ -67,15 +26,16 @@
                 transition: all 0.57s ease;    
                 width: 68%;
             }            
-
-
+            .hero p.info {
+                color: #555; 
+                margin-left: 116px;               
+            }
             .avatar {
                 width: 96px;
                 height: 96px;
                 border-radius: 50%;
                 box-shadow: 0 0 0 3px #FFF, 0 3px 10px rgba(0, 0, 0, .1);
             }
-            
             #links {
                 -webkit-transition: all 0.27s ease;
                 -moz-transition: all 0.27s ease;
@@ -112,6 +72,7 @@
             }
             
             .firm {
+                color: #555;
                 text-decoration: none;
                 border-bottom: 1px solid #fff;
             }
@@ -130,7 +91,6 @@
                 right: 16px;
                 bottom: 0;
             }
-
             .transition97 {
                 -webkit-transition: all 0.97s ease;
                 -moz-transition: all 0.97s ease;
@@ -138,7 +98,6 @@
                 -o-transition: all 0.97s ease;
                 transition: all 0.97s ease; 
             }
-
             .rotatex {
                 -webkit-transform: rotateX(5deg);
                 transform:rotateX(5deg);
@@ -160,14 +119,26 @@
                 <i class="icon-envelope-alt"></i>
             </a>            
         </div>
-        <div class="canvas-container" style="-webkit-perspective:300px;perspective:300px;">
-            <canvas id="canvas" class="transition97"></canvas>
+        <div class="canvas-container" style="-webkit-perspective:300px;perspective:300px; background:#FFF;">
+            <canvas id="canvas" class="transition97" style="display:none;"></canvas>
         </div>
         <div class="hero">
-            <img src="img/me.jpeg" class="avatar" style="float: left;"/>
-            <p class="info">
-                I am Mustafa Dikici. I am a Javascript/Front End Engineer at 
-                <a class="firm" href="http://www.jotform.com"><b>JotForm</b></a> and live in Ankara, Turkey.
+            <img src="img/me2.jpeg" class="avatar" style="float: left;" alt="mustafa dikici"/>
+            <p class="info" style="">
+                I am Mustafa Dikici. I am Javascript Engineer at 
+                <a class="firm" href="http://www.jotform.com"><b>JotForm</b></a> and live in Ankara, Turkey. I have been daily coding javascript for 2 years 
+                including single page applications and nodejs for jotform.com and working on some pet projects time to time, my favorite projects are: <br/>
+                <ul class="he" style="margin-left:80px; list-style:none;">
+                    <li style="border-left: 4px solid #333; padding-left: 16px; margin-bottom:12px;">
+                        <a class="firm" style="border:none" href="http://passport.diki.io"><b>NodeJS Passport Boilerplate</b><br>
+                        NodeJS application starter template including passport authentication in express, mongoose, jade stack
+                        </a>
+                    </li>
+                    <li style="border-left: 4px solid #333; padding-left: 16px;">
+                        <a class="firm" style="border:none" href="http://editor.diki.io"><b>TePe</b><br>a browser based code editor with SFTP connection
+                        </a>
+                    </li>
+                </ul>
             </p>
             
             <p class="source">
@@ -175,32 +146,30 @@
                 <a class="firm" href="https://github.com/diki/diki.io" style="color:#555;">open source</a>
             </p>
         </div>
+        <!-- I love clean code. There, I said it. I pride myself on passing strict linting standards and keeping my code easy to read. 
+        It’s not just a personal proclivity, but a choice I hope benefits other developers. -->
         
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <script>
             (function(){
 
                 var canvas = document.getElementById("canvas");
 
-                var width = canvasWidth = window.innerWidth,
-                    ratio = width/1366,
-                    unit=15*ratio,
-                    canvasHeight = 390*ratio;
-
-                var gridHeight = canvasHeight/unit;
-                var gridWidth = canvasWidth/unit;
+                var width = canvasWidth = window.innerWidth
+                    , ratio = width/1366
+                    , unit=15*ratio
+                    , canvasHeight = 280*ratio
+                    , gridHeight = canvasHeight/unit
+                    , gridWidth = canvasWidth/unit
+                    , ctx = canvas.getContext('2d')
+                    , leftMargin = Math.floor((gridWidth-68)/2)
+                    , topMargin = 6;
 
                 canvas.width = canvasWidth;
                 canvas.height = canvasHeight;
-
                 canvas.style.background = "#FFF";
                 canvas.style.border = "1px solid #e5e5e5";
-
-                var ctx = canvas.getContext('2d');
-
-
-                var leftMargin = Math.floor((gridWidth-68)/2);
-                var topMargin = 6;
+                canvas.style.display = 'block';
 
                 function prepareHelloWorldPoints(){
                     var result = [];
@@ -218,7 +187,6 @@
                         result.push({x:leftMargin, y: topMargin+6+i});
                     }
                     leftMargin += 2
-
                     //e
                     for(var i=0; i<5; i++){
                         result.push({x:leftMargin, y: topMargin+6+i});
@@ -236,7 +204,6 @@
                     result.push({x:leftMargin, y: topMargin+7});
                     result.push({x:leftMargin, y: topMargin+10});
                     leftMargin += 2;
-
                     //l
                     for(var i=0; i<12; i++){
                         result.push({x:leftMargin, y:topMargin+i});
@@ -247,7 +214,6 @@
                         result.push({x:leftMargin, y:topMargin+i});
                     }
                     leftMargin += 2;
-
                     //o
                     for(var i=0; i<5; i++){
                         result.push({x:leftMargin, y: topMargin+6+i});
@@ -263,7 +229,6 @@
                         result.push({x:leftMargin, y: topMargin+6+i});
                     }
                     leftMargin += 4; 
-                    
                     //w
                     for(var i=0; i<3; i++){
                         result.push({x:leftMargin, y: topMargin+5+i});
@@ -297,7 +262,6 @@
                         result.push({x:leftMargin, y: topMargin+5+i});
                     }
                     leftMargin += 2;
-
                     //o
                     for(var i=0; i<5; i++){
                         result.push({x:leftMargin, y: topMargin+6+i});
@@ -313,11 +277,11 @@
                         result.push({x:leftMargin, y: topMargin+6+i});
                     }
                     leftMargin += 2;
-
                     //r
                     for(var i=0; i<7; i++){
                         result.push({x: leftMargin, y:topMargin+5+i});
                     }
+                    
                     leftMargin += 1;
                     result.push({x:leftMargin, y:topMargin+6});
                     leftMargin += 1;
@@ -327,13 +291,11 @@
                     leftMargin += 1; 
                     result.push({x:leftMargin, y:topMargin+6});
                     leftMargin += 2;
-
                     //l
                     for(var i=0; i<12; i++){
                         result.push({x:leftMargin, y:topMargin+i});
                     }
                     leftMargin += 2;
-
                     //d
                     for(var i=0; i<5; i++){
                         result.push({x:leftMargin, y: topMargin+6+i});
@@ -349,7 +311,6 @@
                         result.push({x:leftMargin, y:topMargin+i});
                     }
                     leftMargin += 3;
-
                     return result;
                 }
 
@@ -369,12 +330,11 @@
                     //clear canvas
                     ctx.clearRect(0, 0, canvasWidth , canvasHeight);
 
-                    //draw lines
+                    //draw vertical lines
                     for(var i=0; i<gridWidth; i++){
                         drawLine(i*16*ratio, 0, i*16*ratio,canvasHeight);
                     }
-
-                    //draw lines
+                    //draw horizontal lines
                     for(var j=0; j<gridHeight; j++){
                         drawLine(0, j*16*ratio,canvasWidth,j*16*ratio);
                     }
@@ -425,6 +385,9 @@
                     }
                     
                     this.movePoint = function(){
+                        if(this.path.length === this.path.length/2) {
+
+                        }
                         if(this.path.length === 0){
                             
                             if(!this.completed){
@@ -472,12 +435,29 @@
                         this.path.pop();
                     }
                 }
-
-
             })();
-
         </script>
 
+        <script src="js/fittext.js"></script>
+        <script src="js/flowtype.js"></script>
+        
+        <script>
+          jQuery(".info").flowtype({
+                fontRatio : 30
+            });
+          jQuery(".he").flowtype({
+                fontRatio : 40
+            });          
+        </script>        
 
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-47906848-1', 'diki.io');
+          ga('send', 'pageview');
+        </script>
     </body>
 </html>
