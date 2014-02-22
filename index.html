@@ -37,14 +37,14 @@
                 box-shadow: 0 0 0 3px #FFF, 0 3px 10px rgba(0, 0, 0, .1);
             }
             #links {
-                -webkit-transition: all 0.27s ease;
-                -moz-transition: all 0.27s ease;
-                -ms-transition: all 0.27s ease;
-                -o-transition: all 0.27s ease;
-                transition: all 0.27s ease;                
+                -webkit-transition: all 0.27s ease-in;
+                -moz-transition: all 0.27s ease-in;
+                -ms-transition: all 0.27s ease-in;
+                -o-transition: all 0.27s ease-in;
+                transition: all 0.27s ease-in;                
                 position: absolute;
-                right: 18px;
-                top: -35px;
+                left: 18px;
+                bottom: -45px;
             }
             .social {
                 -webkit-transition: all 0.37s ease;
@@ -123,7 +123,10 @@
             <canvas id="canvas" class="transition97" style="display:none;"></canvas>
         </div>
         <div class="hero">
-            <img src="img/me2.jpeg" class="avatar" style="float: left;" alt="mustafa dikici"/>
+            <div style="float:left;">
+                <img src="img/me2.jpeg" class="avatar" style="" alt="mustafa dikici"/>
+
+            </div>
             <p class="info" style="">
                 I am Mustafa Dikici. I am Javascript Engineer at 
                 <a class="firm" href="http://www.jotform.com"><b>JotForm</b></a> and live in Ankara, Turkey. I have been daily coding javascript for 2 years 
@@ -401,9 +404,10 @@
                                 $(".hero").css("opacity", 1);
 
                                 setTimeout(function(){
-                                    $("#canvas").addClass("rotatex");
+                                    //$("#canvas").addClass("rotatex");
                                     setTimeout(function(){
-                                        $("#links").css("top", 13);
+                                        $("#links").css("bottom", 13);
+                                        $(".source").css("opacity", 1);
                                     }, 600);
                                     setTimeout(function(){
                                         $("#canvas").removeClass("rotatex");
@@ -412,7 +416,7 @@
 
                                 setTimeout(function(){
                                     
-                                    $(".source").css("opacity", 1);
+                                    
                                     
                                 }, 3000);
                             }
